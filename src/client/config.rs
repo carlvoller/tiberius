@@ -314,6 +314,8 @@ pub(crate) trait ConfigString {
             Some(val) if val.to_lowercase() == "sspi" || Self::parse_bool(val)? => {
                 Ok(AuthMethod::Integrated)
             }
+            
+            // Should sspi-rs take over the default behaviour here if enabled?
             _ => Ok(AuthMethod::sql_server(user.unwrap_or(""), pw.unwrap_or(""))),
         }
     }
