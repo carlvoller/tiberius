@@ -315,9 +315,7 @@ pub(crate) trait ConfigString {
                 (Some(user), Some(pw)) => Ok(AuthMethod::windows(user, pw)),
                 #[cfg(feature = "integrated-auth-gssapi")]
                 (None, None) => Ok(AuthMethod::Integrated),
-                // this maintains the existing default behaviour. we could also throw an error here too, 
-                // but that may break some edge case an existing user may be relying on
-                _ => Ok(AuthMethod::sql_server(user.unwrap_or(""), pw.unwrap_or(""))),
+                _ => Ok(AuthMethod::windows(user.unwrap_or(""), pw.unwrap_or(""))),
             },
             #[cfg(all(unix, feature = "integrated-auth-gssapi", not(feature = "sspi-rs")))]
             Some(val) if val.to_lowercase() == "sspi" || Self::parse_bool(val)? => {

@@ -168,6 +168,10 @@ impl From<libgssapi::error::Error> for Error {
 }
 
 #[cfg(all(unix, feature = "sspi-rs"))]
+#[cfg_attr(
+    feature = "docs",
+    doc(cfg(all(unix, feature = "sspi-rs")))
+)]
 impl From<sspi::Error> for Error {
     fn from(err: sspi::Error) -> Self {
         Error::SspiRs(format!("{}", err))
