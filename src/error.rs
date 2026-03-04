@@ -48,6 +48,12 @@ pub enum Error {
     /// An error from the GSSAPI library.
     #[error("GSSAPI Error: {}", _0)]
     Gssapi(String),
+
+    #[cfg(any(all(unix, feature = "sspi-rs"), doc))]
+    #[cfg_attr(
+        feature = "docs",
+        doc(cfg(all(unix, feature = "sspi-rs")))
+    )]
     /// An error in the sspi-rs library.
     #[error("sspi-rs Error {}", _0)]
     SspiRs(String),

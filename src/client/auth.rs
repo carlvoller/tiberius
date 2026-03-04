@@ -29,7 +29,7 @@ impl Debug for SqlServerAuth {
 #[cfg(any(all(windows, feature = "winauth"), all(unix, feature = "sspi-rs"), doc))]
 #[cfg_attr(
     feature = "docs",
-    doc(any(all(windows, feature = "winauth"), all(unix, feature = "sspi-rs")))
+    doc(cfg(any(all(windows, feature = "winauth"), all(unix, feature = "sspi-rs"))))
 )]
 pub struct WindowsAuth {
     pub(crate) user: String,
@@ -40,7 +40,7 @@ pub struct WindowsAuth {
 #[cfg(any(all(windows, feature = "winauth"), all(unix, feature = "sspi-rs"), doc))]
 #[cfg_attr(
     feature = "docs",
-    doc(any(all(windows, feature = "winauth"), all(unix, feature = "sspi-rs")))
+    doc(cfg(any(all(windows, feature = "winauth"), all(unix, feature = "sspi-rs"))))
 )]
 impl Debug for WindowsAuth {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
