@@ -55,7 +55,7 @@ pub enum Error {
         doc(cfg(all(unix, feature = "sspi-rs")))
     )]
     /// An error in the sspi-rs library.
-    #[error("sspi-rs Error {}", _0)]
+    #[error("sspi-rs Error: {}", _0)]
     SspiRs(String),
     #[error(
         "Server requested a connection to an alternative address: `{}:{}`",
@@ -168,7 +168,7 @@ impl From<libgssapi::error::Error> for Error {
 }
 
 #[cfg(all(unix, feature = "sspi-rs"))]
-impl From <sspi::Error> for Error {
+impl From<sspi::Error> for Error {
     fn from(err: sspi::Error) -> Self {
         Error::SspiRs(format!("{}", err))
     }
